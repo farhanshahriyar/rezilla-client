@@ -13,7 +13,9 @@ const Main = () => {
     <div>
         {!noHeaderFooter && <Header/>}
        {/* <Header/> */}
-       <Outlet/>
+        <div className='max-w-screen-xl mx-auto'>
+            <Outlet/>
+        </div> 
        {!noHeaderFooter && <Footer/>}
        {/* <Footer/> */}
     </div>
