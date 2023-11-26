@@ -8,6 +8,8 @@ import Contact from "../pages/Contact/Contact";
 import Error from "../pages/Error/Error";
 import Service from "../pages/Services/Service";
 import Construction from "../pages/UnderConstruction/Construction";
+import AllProperties from "../pages/AllProperties/AllProperties";
+
 
 export const router = createBrowserRouter([
     {
@@ -16,7 +18,7 @@ export const router = createBrowserRouter([
       children:[
         { path: "/", element: <Home/>},
         { path: "/about-us", element: <About/>},
-        // { path: "/all-properties", element: <AllProperties/>},
+        { path: "/all-properties", element: <AllProperties/>},
         { path: "/services", element: <Service/>},
         { path: "/contact", element: <Contact/>},
         { path: "/pricing", element: <Construction/>},
