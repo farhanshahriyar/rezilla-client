@@ -70,8 +70,8 @@ const About = () => {
                         <defs>
                           <linearGradient id="paint0_linear_1416_214" x1="-10.3111" y1="47.127" x2="-10.3111"
                             y2="178.431" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="white" />
-                            <stop offset="1" stop-color="white" stop-opacity="0" />
+                            <stop stopColor="white" />
+                            <stop offset="1" stopColor="white" stopOpacity="0" />
                           </linearGradient>
                         </defs>
                       </svg>
@@ -83,8 +83,8 @@ const About = () => {
                         <defs>
                           <linearGradient id="paint0_linear_1416_215" x1="78.6495" y1="-6.67725" x2="78.6495"
                             y2="133.937" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="white" />
-                            <stop offset="1" stop-color="white" stop-opacity="0" />
+                            <stop stopColor="white" />
+                            <stop offset="1" stopColor="white" stopOpacity="0" />
                           </linearGradient>
                         </defs>
                       </svg>
@@ -97,8 +97,8 @@ const About = () => {
                         <defs>
                           <linearGradient id="paint0_linear_1416_216" x1="225.634" y1="108.611" x2="225.634" y2="256.79"
                             gradientUnits="userSpaceOnUse">
-                            <stop stop-color="white" />
-                            <stop offset="1" stop-color="white" stop-opacity="0" />
+                            <stop stopColor="white" />
+                            <stop offset="1" stopColor="white" stopOpacity="0" />
                           </linearGradient>
                         </defs>
                       </svg>
