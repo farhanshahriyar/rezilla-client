@@ -12,6 +12,8 @@ import AllProperties from "../pages/AllProperties/AllProperties";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/Register/SignUp";
 import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
+import Test from "../pages/Test/Test"; // private route 1
+import PrivateRoute from "./PrivateRoute";
 
 
 export const router = createBrowserRouter([
@@ -23,13 +25,28 @@ export const router = createBrowserRouter([
         { path: "/", element: <Home/>},
         { path: "*", element: <Error/>},
         { path: "/about-us", element: <About/>},
-        { path: "/all-properties", element: <AllProperties/>},
-        { path: "/properties/:id", element: <PropertyDetails/>, loader: ({params})=> fetch(`http://localhost:5000/properties/${params.id}`).then(res=>res.json())},
+        { path: "/all-properties", element: 
+        <PrivateRoute>
+          <AllProperties/>
+        </PrivateRoute>,
+        },
+        { path: "/properties/:id", element: 
+        <PrivateRoute>
+         <PropertyDetails/>
+         </PrivateRoute>,
+         loader: ({params})=> fetch(`http://localhost:5000/properties/${params.id}`).then(res=>res.json())
+        },
         { path: "/services", element: <Service/>},
         { path: "/contact", element: <Contact/>},
         { path: "/pricing", element: <Construction/>},
         { path: "/login", element: <Login/>},
         { path: "/sign-up", element: <SignUp/>},
+        // private route
+        { path: "/test", element: 
+        <PrivateRoute>
+          <Test/>
+        </PrivateRoute>
+       },
       ]
     },
   ]);
