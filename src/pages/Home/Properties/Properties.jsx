@@ -41,6 +41,7 @@ import React from 'react';
 import { IoLocationSharp } from "react-icons/io5";
 import useProperties from '../../../hooks/useProperties';
 import Loading from '../../Shared/LoadingSpinner/Loading'
+import { Link } from 'react-router-dom';
 
 
 const Properties = () => {
@@ -67,7 +68,10 @@ const Properties = () => {
                 {property.verified && (
                   <span className="text-[#143C38] text-xs font-semibold">Verified</span>
                 )}
-                <button className="bg-[#010202] text-white text-xs py-2 px-4 rounded transition duration-300 ease-in-out transform hover:-translate-y-1">View More</button>
+                <Link to={`/properties/${property._id}`}>
+                <button 
+                 className="bg-[#010202] text-white text-xs py-2 px-4 rounded transition duration-300 ease-in-out transform hover:-translate-y-1">View More</button>
+                </Link>
               </div>
             </div>
           </div>

@@ -12,7 +12,7 @@ import AllProperties from "../pages/AllProperties/AllProperties";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/Register/SignUp";
 import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
-import Test from "../pages/Test/Test"; // private route 1
+// import Test from "../pages/Test/Test"; // private route 1
 import PrivateRoute from "./PrivateRoute";
 
 
@@ -41,13 +41,13 @@ export const router = createBrowserRouter([
         { path: "/pricing", element: <Construction/>},
         { path: "/login", element: <Login/>},
         { path: "/sign-up", element: <SignUp/>},
-        // private route
-        { path: "/test", element: 
-        <PrivateRoute>
-          <Test/>
-        </PrivateRoute>
-       },
-      ]
-    },
+      //   { path: "/test", element: 
+      //   <PrivateRoute>
+      //     <Test/>
+      //   </PrivateRoute>
+      //  },
+    ]
+  },
+  // dashboard routes
   ]);
 
