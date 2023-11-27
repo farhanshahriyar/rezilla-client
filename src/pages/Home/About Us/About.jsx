@@ -2,11 +2,15 @@ import React from 'react';
 import aboutImg1 from '../../../../public/assets/images/about/about-1.jpeg' 
 import aboutImg2 from '../../../../public/assets/images/about/about-2.jpeg'
 import aboutImg3 from '../../../../public/assets/images/about/about-3.jpeg'
+import { Helmet } from 'react-helmet-async';
 
 const About = () => {
   return (
 
     <section id="about" className="bg-gray-1 dark:bg-dark-2 pt-20 pb-8 lg:pt-[120px] lg:pb-[70px]">
+      <Helmet>
+                <title>Rezilla | About Us</title>
+            </Helmet>
     <div className="container">
       <div className="wow fadeInUp" data-wow-delay=".2s">
         <div className="-mx-4 flex flex-wrap items-center">
@@ -26,7 +30,7 @@ const About = () => {
                 Our team is made up of experienced agents who know the market inside out and can provide you with expert advice on how to make the most of your investment. Whether you're looking for a new place to live or want to sell your current one, we're here for you every step of the way!
               </p>
 
-              <a href="#"
+              <a href="/contact"
                 className="inline-flex items-center justify-center py-3 text-base font-medium text-center text-white border border-primary rounded-md px-7 bg-[#143C38] hover:bg-blue-dark hover:border-blue-dark transition duration-300 ease-in-out transform hover:-translate-y-1">
                 Know More
               </a>
