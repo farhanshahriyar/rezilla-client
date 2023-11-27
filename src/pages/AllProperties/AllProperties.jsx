@@ -439,6 +439,9 @@ export default function AllProperties() {
   const [searchQuery, setSearchQuery] = useState('');
   const [gridView, setGridView] = useState(true); // true for grid, false for list
   // const [sortType, setSortType] = useState('Newest'); // sort by Newest, Price: Low to High, Price: High to Low
+  // const [showProperties, setShowProperties] = useState('All Properties'); // show All Properties, For Sale, For Rent
+
+
   // Event handler for search input field
   const handleSearchInput = (event) => {
     setSearchQuery(event.target.value);
@@ -473,6 +476,14 @@ export default function AllProperties() {
   //   }
   // }, [properties, sortType]);
   // console.log(sortedProperties);
+
+  //show more properties functionalities
+  // const handleShowProperties = () => {
+  //   // next properties pawar jonne
+  //   const nextProperties = properties.slice(0, properties.length + 4);
+  //   // display products array er moddhe push kore dibo
+  //   setShowProperties(nextProperties);
+  // }
 
  
 
@@ -773,14 +784,7 @@ export default function AllProperties() {
                   ))}
                 </div>
                 {/* see more */}
-                {/* {displayLimit < properties.length && (
-                  <button
-                    className="rounded-md px-5 py-2.5 text-sm font-medium text-teal-600 border-spacing-2 border border-teal-600 hover:bg-teal-600 hover:text-white hover:border-teal-600 transition mt-8"
-                    onClick={handleShowMoreProperties}
-                  >
-                    Show More Properties
-                  </button>
-                )} */}
+          
               </div>
             </div>
           </section>

@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 // /* eslint-disable no-unused-vars */
 import React from 'react';
 import { IoLocationSharp } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 
-const PropertiesCard = ({ property }) => { // Expect a single property object
+const PropertiesCard = ({ property }) => { 
   const { _id, imageUrl, title, location, price, agentName, agentImg, verified } = property;
 
   return (
@@ -28,7 +30,9 @@ const PropertiesCard = ({ property }) => { // Expect a single property object
             )}
         <div className="flex items-center justify-between mt-4 mb-4">
             <p className="text-lg font-bold text-[#143C38] mt-2">${price}</p>
+            <Link to={`/properties/${_id}`}>
           <button className="bg-[#010202] text-white text-xs py-2 px-4 rounded transition duration-300 ease-in-out transform hover:-translate-y-1">View More</button>
+          </Link>
         </div>
       </div>
     </div>

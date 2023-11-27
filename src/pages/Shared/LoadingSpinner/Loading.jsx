@@ -11,7 +11,7 @@ const Loading = () => {
       
       const spinnerStyle = {
         border: '6px solid #f3f3f3', // Light grey
-        borderTop: '6px solid #3498db', // Blue color
+        borderTop: '6px solid #143C38', // green
         borderRadius: '50%',
         width: '50px',
         height: '50px',

@@ -11,6 +11,7 @@ import Construction from "../pages/UnderConstruction/Construction";
 import AllProperties from "../pages/AllProperties/AllProperties";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/Register/SignUp";
+import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
 
 
 export const router = createBrowserRouter([
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
         { path: "*", element: <Error/>},
         { path: "/about-us", element: <About/>},
         { path: "/all-properties", element: <AllProperties/>},
+        { path: "/properties/:id", element: <PropertyDetails/>, loader: ({params})=> fetch(`http://localhost:5000/properties/${params.id}`).then(res=>res.json())},
         { path: "/services", element: <Service/>},
         { path: "/contact", element: <Contact/>},
         { path: "/pricing", element: <Construction/>},
