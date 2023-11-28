@@ -4,13 +4,19 @@ import { Link, Outlet } from 'react-router-dom'
 import {MdOutlinePayments} from 'react-icons/md'
 import {MdRateReview} from 'react-icons/md'
 import useWishList from '../../hooks/useWishList'
+import useAdmin from '../../hooks/useAdmin'
+import useAgent from '../../hooks/useAgent'
 
 
 const Dashboard = () => {
-    // admin panel works
-  const isAdmin = true; // true for admin panel and false for user panel
-  const isAgent = false; // true for agent panel and false for user panel
+  // const isAdmin = true; 
+  // const isAgent = false; 
   const [wishList] = useWishList();
+  // custom hook for admin panel
+  const [isAdmin] = useAdmin()
+  // custom hook for agent panel
+  const [isAgent] = useAgent()
+
   return (
     <div>
          <div className='flex'>
@@ -51,7 +57,8 @@ const Dashboard = () => {
                 <div className="py-3 flex items-center text-xs text-white uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ms-6 dark:text-gray-700 dark:before:border-gray-600 dark:after:border-gray-600">More Options</div>
               
                 <li className="mb-2"><Link to="/all-properties" className="px-4 py-2 flex text-white bg-green-700 rounded"><FaHome  className='text-xl' />Properties</Link></li>
-                <li className="mb-2"><Link to="/contact-us" className="px-4 py-2 flex text-white bg-green-700 rounded">Contact</Link></li>
+                <li className="mb-2"><Link to="/contact" className="px-4 py-2 flex text-white bg-green-700 rounded">Contact</Link></li>
+                <li className="mb-2"><Link to="/" className="px-4 py-2 flex text-white bg-green-700 rounded">Back To Home</Link></li>
             </ul>
         </div>
         <div className='flex-1 p-8'>

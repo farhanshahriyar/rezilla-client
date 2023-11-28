@@ -5,7 +5,7 @@ import axios from 'axios';
 import Loading from '../../Shared/LoadingSpinner/Loading';
 import Swal from 'sweetalert2';
 
-const AdminProfile = () => {
+const UserProfile = () => {
   const { user } = useContext(AuthContext);
   const [profile, setProfile] = useState(null);
 
@@ -74,4 +74,4 @@ const AdminProfile = () => {
   );
 };
 
-export default AdminProfile;
+export default UserProfile;

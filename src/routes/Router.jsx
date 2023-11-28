@@ -19,6 +19,9 @@ import UserWishList from "../pages/UserDashboard/UserWishList";
 import MakeOfferPage from "../pages/MakeOffer/MakeOfferPage";
 import AllUsers from "../pages/AdminDashboard/AllUsers/AllUsers";
 import AdminProfile from "../pages/AdminDashboard/AdminProfile/AdminProfile";
+import UserProfile from "../pages/UserDashboard/UserProfile/UserProfile";
+import BoughtProperty from "../pages/UserDashboard/UserBoughtProperty/BoughtProperty";
+import MyReview from "../pages/UserDashboard/UserReviews/MyReview";
 
 
 export const router = createBrowserRouter([
@@ -79,7 +82,25 @@ export const router = createBrowserRouter([
           element: <PrivateRoute>
             <AdminProfile/>
           </PrivateRoute>
-        }
+        },
+        {
+          path: "/dashboard/my-profile",
+          element: <PrivateRoute>
+            <UserProfile/>
+          </PrivateRoute>
+        },
+        {
+          path: "/dashboard/property-bought",
+          element: <PrivateRoute>
+            <BoughtProperty/>
+          </PrivateRoute>
+        },
+        {
+          path: "/dashboard/add-review",
+          element: <PrivateRoute>
+            <MyReview/>
+          </PrivateRoute>
+        },
         
       ]
     }
