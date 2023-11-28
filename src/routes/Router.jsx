@@ -18,6 +18,7 @@ import Dashboard from "../layouts/Dashboard/Dashboard";
 import UserWishList from "../pages/UserDashboard/UserWishList";
 import MakeOfferPage from "../pages/MakeOffer/MakeOfferPage";
 import AllUsers from "../pages/AdminDashboard/AllUsers/AllUsers";
+import AdminProfile from "../pages/AdminDashboard/AdminProfile/AdminProfile";
 
 
 export const router = createBrowserRouter([
@@ -71,6 +72,12 @@ export const router = createBrowserRouter([
           path: "/dashboard/all-users",
           element: <PrivateRoute>
             <AllUsers/>
+          </PrivateRoute>
+        },
+        {
+          path: "/dashboard/admin-profile",
+          element: <PrivateRoute>
+            <AdminProfile/>
           </PrivateRoute>
         }
         
