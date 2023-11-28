@@ -22,6 +22,10 @@ import AdminProfile from "../pages/AdminDashboard/AdminProfile/AdminProfile";
 import UserProfile from "../pages/UserDashboard/UserProfile/UserProfile";
 import BoughtProperty from "../pages/UserDashboard/UserBoughtProperty/BoughtProperty";
 import MyReview from "../pages/UserDashboard/UserReviews/MyReview";
+import AddPropery from "../pages/AgentDashboard/AddProperty/AddPropery";
+import AddProperties from "../pages/AgentDashboard/MyAddProperties/AddProperties";
+import RequestedProperties from "../pages/AgentDashboard/RequestedProperties/RequestedProperties";
+import SoldProperties from "../pages/AgentDashboard/SoldProperties/SoldProperties";
 
 
 export const router = createBrowserRouter([
@@ -99,6 +103,30 @@ export const router = createBrowserRouter([
           path: "/dashboard/add-review",
           element: <PrivateRoute>
             <MyReview/>
+          </PrivateRoute>
+        },
+        {
+          path: "/dashboard/requested-properties",
+          element: <PrivateRoute>
+            <RequestedProperties/>
+          </PrivateRoute>
+        },
+        {
+          path: "/dashboard/my-added-properties",
+          element: <PrivateRoute>
+            <AddProperties/>
+          </PrivateRoute>
+        },
+        {
+          path: "/dashboard/add-property",
+          element: <PrivateRoute>
+            <AddPropery/>
+          </PrivateRoute>
+        },
+        {
+          path: "/dashboard/my-sold-properties",
+          element: <PrivateRoute>
+            <SoldProperties/>
           </PrivateRoute>
         },
         

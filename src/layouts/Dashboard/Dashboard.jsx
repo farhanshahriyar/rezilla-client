@@ -35,7 +35,7 @@ const Dashboard = () => {
           {isAgent && (
             <>
               {/* Agent specific routes */}
-              <li className="mb-2"><Link to="/dashboard/agent-profile" className="px-4 py-2 text-white bg-green-700 rounded flex"><FaUsers className='text-xl' />Agent Profile</Link></li>
+              <li className="mb-2"><Link to="/dashboard/my-profile" className="px-4 py-2 text-white bg-green-700 rounded flex"><FaUsers className='text-xl' />Agent Profile</Link></li>
               <li className="mb-2"><Link to="/dashboard/add-property" className="px-4 py-2 flex text-white bg-green-700 rounded"><FaHome className='text-xl' />Add Property</Link></li>
               <li className="mb-2"><Link to="/dashboard/my-added-properties" className="px-4 py-2 flex text-white bg-green-700 rounded"><FaShoppingBag className='text-xl' />My Added Properties</Link></li>
               <li className="mb-2"><Link to="/dashboard/my-sold-properties" className="px-4 py-2 flex text-white bg-green-700 rounded"><MdOutlinePayments className='text-xl' />My Sold Properties</Link></li>
