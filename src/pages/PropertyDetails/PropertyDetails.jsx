@@ -32,7 +32,7 @@ export default function PropertyDetails() {
     if (user && user.displayName && user.email) {
       // Constructing the wishItem object from the property details
       const wishItem = {
-        menuId: property._id,
+        propertyId: property._id,
         email: user.email,
         title: property.title,
         price: property.price,
@@ -58,12 +58,19 @@ export default function PropertyDetails() {
       }).catch(error => {
         // Handle any error here
         console.error("Error adding to wishlist:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
     } else {
       // Handle not logged in scenario
        // redirect to login page
        Swal.fire({
-        tite: "Please Login First to add items to cart",
+        tite: "Please Login First to add items to Wishlist",
         title: "You are not logged in",
         icon: "warning",
         showCancelButton: true,
@@ -98,6 +105,7 @@ export default function PropertyDetails() {
               height={200}
               x="50%"
               y={-1}
+
               patternUnits="userSpaceOnUse"
             >
               <path d="M100 200V.5M.5 .5H200" fill="none" />

@@ -15,6 +15,8 @@ import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
 // import Test from "../pages/Test/Test"; // private route 1
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../layouts/Dashboard/Dashboard";
+import UserWishList from "../pages/UserDashboard/UserWishList";
+import MakeOfferPage from "../pages/MakeOffer/MakeOfferPage";
 
 
 export const router = createBrowserRouter([
@@ -42,6 +44,9 @@ export const router = createBrowserRouter([
         { path: "/pricing", element: <Construction/>},
         { path: "/login", element: <Login/>},
         { path: "/sign-up", element: <SignUp/>},
+        { path: "/make-offer/:propertyId" , element:<PrivateRoute><MakeOfferPage/></PrivateRoute>,
+        loader: ({params})=> fetch(`http://localhost:5000/properties/${params.id}`).then(res=>res.json())
+      }
       //   { path: "/test", element: 
       //   <PrivateRoute>
       //     <Test/>
@@ -54,7 +59,15 @@ export const router = createBrowserRouter([
       path: "/dashboard",
       element: <PrivateRoute>
         <Dashboard/>
-      </PrivateRoute>
+      </PrivateRoute>,
+      children: [
+        { path: "/dashboard/wishlist",
+          element: <PrivateRoute>
+            <UserWishList/>
+          </PrivateRoute>,
+        },
+        
+      ]
     }
   ]);
 
