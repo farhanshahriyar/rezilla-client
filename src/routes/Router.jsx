@@ -14,6 +14,7 @@ import SignUp from "../pages/Register/SignUp";
 import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
 // import Test from "../pages/Test/Test"; // private route 1
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../layouts/Dashboard/Dashboard";
 
 
 export const router = createBrowserRouter([
@@ -49,5 +50,11 @@ export const router = createBrowserRouter([
     ]
   },
   // dashboard routes
+    {
+      path: "/dashboard",
+      element: <PrivateRoute>
+        <Dashboard/>
+      </PrivateRoute>
+    }
   ]);
 

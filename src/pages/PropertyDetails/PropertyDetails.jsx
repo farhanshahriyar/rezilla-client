@@ -1,11 +1,87 @@
 /* eslint-disable no-unused-vars */
 import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
-import { useLoaderData } from 'react-router-dom';
+import { Navigate, useLoaderData, useLocation } from 'react-router-dom';
 import { FaBed } from "react-icons/fa";
 import { FaBath } from "react-icons/fa";
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useWishList from '../../hooks/useWishList';
+import useAuth from '../../hooks/useAuth';
+import Swal from 'sweetalert2'
+import Loading from '../Shared/LoadingSpinner/Loading';
 
 export default function PropertyDetails() {
-    const property = useLoaderData(); //  data returned from the loader function in router.jsx
+  
+  const {user} = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const [, refetch] = useWishList();
+  // const navigation = useNavigation();
+  const location1 = useLocation();
+  const property = useLoaderData(); //  data returned from the loader function in router.jsx
+
+  const form = location1.state?.form?.pathname || '/';
+
+
+     // Handle undefined property
+      if (!property) {
+        return <Loading />;
+      }
+      
+
+  // Wishlist function
+  const handleAddToWishList = () => {
+    if (user && user.displayName && user.email) {
+      // Constructing the wishItem object from the property details
+      const wishItem = {
+        menuId: property._id,
+        email: user.email,
+        title: property.title,
+        price: property.price,
+        location: property.location,
+        imageUrl: property.imageUrl,
+        agentName: property.agentName,
+        agentImg: property.agentImg,
+        verified: property.verified
+      };
+
+      
+      axiosSecure.post('/wishlists', wishItem).then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            icon: "success",
+            title: `${property.title} Added to Wishlist`,
+            text: "Your item has been added to the wishlist successfully!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          refetch();
+        }
+      }).catch(error => {
+        // Handle any error here
+        console.error("Error adding to wishlist:", error);
+      });
+    } else {
+      // Handle not logged in scenario
+       // redirect to login page
+       Swal.fire({
+        tite: "Please Login First to add items to cart",
+        title: "You are not logged in",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes Login",
+        cancelButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // send user to login page
+          Navigate("/login", { state: { form: location } });
+        }
+      });
+    }
+  };
+
+
+  //  end of wishlist functions
 
 
   return (
@@ -51,7 +127,12 @@ export default function PropertyDetails() {
               <div className=' items-center gap-4 mb-5'>
                 <span className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">${property.price}</span>
               </div>
-                <button className="bg-[#010202] text-white text-xs py-2 px-4 rounded transition duration-300 ease-in-out transform hover:-translate-y-1">Add to Wishlist</button>
+              {/* wishlist functions */}
+
+              <button onClick={handleAddToWishList}
+              className="bg-[#010202] text-white text-base py-4 px-4 rounded transition duration-300 ease-in-out transform hover:-translate-y-1">Add to Wishlist</button>
+
+              {/*  */}
               <p className="text-xl leading-8 text-gray-700">
                 {property.description}
               </p>
