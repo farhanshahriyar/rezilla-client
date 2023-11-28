@@ -17,6 +17,7 @@ import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../layouts/Dashboard/Dashboard";
 import UserWishList from "../pages/UserDashboard/UserWishList";
 import MakeOfferPage from "../pages/MakeOffer/MakeOfferPage";
+import AllUsers from "../pages/AdminDashboard/AllUsers/AllUsers";
 
 
 export const router = createBrowserRouter([
@@ -66,6 +67,12 @@ export const router = createBrowserRouter([
             <UserWishList/>
           </PrivateRoute>,
         },
+        {
+          path: "/dashboard/all-users",
+          element: <PrivateRoute>
+            <AllUsers/>
+          </PrivateRoute>
+        }
         
       ]
     }
