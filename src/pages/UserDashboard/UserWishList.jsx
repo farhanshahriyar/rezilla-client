@@ -57,17 +57,7 @@ const UserWishList = () => {
     };
 
 
-    // const [isModalOpen, setIsModalOpen] = useState(false);
-    // const [selectedProperty, setSelectedProperty] = useState(null);
-  
-    // const handleMakeOfferClick = (property) => {
-    //   setSelectedProperty(property);
-    //   setIsModalOpen(true);
-    // };
-  
-    // const handleCloseModal = () => {
-    //   setIsModalOpen(false);
-    // };
+
 
     return (
 
@@ -189,8 +179,7 @@ const UserWishList = () => {
                                       {property.agentName}
                                   </td>
                                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                                  <span className={`${property.verified ? 'text-green-500' : 'text-red-500'}`}>
-                                     {property.Unverified ? 'Verified' : 'Unverified'}
+                                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full  text-gray-800">{property.status ? "pending" : "verified"}
                                 </span>
                                   </td>
                                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">

@@ -217,7 +217,7 @@ export default function PropertyDetails() {
               </button>
 
               {/*  */}
-              <p className="text-xl leading-8 text-gray-700">
+              <p className="text-base leading-8 text-gray-700 mt-2">
                 {property.description}
               </p>
             </div>

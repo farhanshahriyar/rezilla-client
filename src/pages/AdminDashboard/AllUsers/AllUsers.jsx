@@ -4,15 +4,25 @@ import React, { useState } from "react";
 import { FaTrash, FaUser } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
+  const {user} = useAuth();
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState(""); // search term
   const { data: users = [], refetch } = useQuery({
-    queryKey: ["/users"],
+    queryKey: ["/users", user?.email],
+    enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get("/users");
-      return res.data;
+      try {
+        const res = await axiosSecure.get(`/users?email=${user?.email}`);
+        return res.data;
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        navigate('/');
+      }
     },
   });
 

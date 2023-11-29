@@ -28,6 +28,8 @@ import RequestedProperties from "../pages/AgentDashboard/RequestedProperties/Req
 import SoldProperties from "../pages/AgentDashboard/SoldProperties/SoldProperties";
 import ManageReviews from "../pages/AdminDashboard/ManageReviews/ManageReviews";
 import ManageProperties from "../pages/AdminDashboard/ManageProperties/ManageProperties";
+// import UpdateAddedProperties from "../pages/AgentDashboard/MyAddProperties/UpdateAddedProperties/UpdateAddedProperties";
+import UpdateAddedProperties from "../pages/AgentDashboard/MyAddProperties/UpdateAddedProperties/UpdateAddedProperties"
 
 
 export const router = createBrowserRouter([
@@ -114,7 +116,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         },
         {
-          path: "/dashboard/my-added-properties",
+          path: "/dashboard/myadded-properties",
           element: <PrivateRoute>
             <AddProperties/>
           </PrivateRoute>
@@ -143,6 +145,12 @@ export const router = createBrowserRouter([
             <ManageProperties/>
           </PrivateRoute>
         },
+        {
+          path: "/dashboard/update-myaddedproperty/:id",
+          element: <PrivateRoute>
+            <UpdateAddedProperties/>
+          </PrivateRoute>,
+        }
         
       ]
     }

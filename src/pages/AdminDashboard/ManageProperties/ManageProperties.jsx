@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import useAuth from '../../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 
 const ManageProperties = () => {
     const [properties, setProperties] = useState([]);
+    const {user} = useAuth()
+    const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch properties when component mounts
-    axios.get('http://localhost:5000/properties')
+    if (!user?.email) return;
+    axios.get(`http://localhost:5000/properties?email=${user?.email}`)
       .then(response => setProperties(response.data))
-      .catch(error => console.error('Error fetching properties:', error));
-  }, []);
+      .catch(error => {
+        console.error('Error fetching properties:', error)
+        navigate('/');
+      });
+  }, [user?.email]);
 
   const approveProperty = (propertyId) => {
     axios.patch(`http://localhost:5000/properties/approve/${propertyId}`)
@@ -27,7 +35,7 @@ const ManageProperties = () => {
   };
 
   const rejectProperty = (propertyId) => {
-    axios.delete(`http://localhost:5000/properties/${propertyId}`)
+    axios.patch(`http://localhost:5000/properties/reject/${propertyId}`)
       .then(() => {
         // Remove the property from state
         setProperties(properties.filter(property => property._id !== propertyId));
@@ -66,7 +74,11 @@ const ManageProperties = () => {
                         <tr>
                         <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Name</th>
                         <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Location</th>
-                        <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Address</th>
+                        <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Agent Name</th>
+                        <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Agent Image</th>
+                        <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Agent Email</th>
+                        <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Price</th>
+                        <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Status</th>
                         <th scope="col" className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">Action</th>
                         </tr>
                     </thead>
@@ -76,16 +88,19 @@ const ManageProperties = () => {
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{property.title}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{property.location}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{property.agentName}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> 
+                            <img className="w-10 h-10 rounded-full object-cover" src={property.agentImg} alt={property.agentName} />
+                        </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{property.email}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{property.price}</td>
-                        <td>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
                                 {property.status === "pending" && (
                                 <div className='flex gap-5'>
                                     <button onClick={() => approveProperty(property._id)} type='button' className='inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-green-600 '>Verify</button>
                                     <button onClick={() => rejectProperty(property._id)} type='button' className='inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 '>Reject</button>
                                 </div>
                                 )}
-                                {property.status === "approved" && <span className='text-green-800 text-lg'>Verified</span>}
+                                {property.status === "verified" && <span className='text-green-800 text-lg'>Verified</span>}
                             </td>
                     
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">

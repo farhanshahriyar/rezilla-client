@@ -11,10 +11,10 @@ const useProperties = () => {
     const [properties2, setProperties2] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:5000/properties')
+        fetch('http://localhost:5000/all-properties')
         .then(res => res.json())
         .then((data)=>{
-            // console.log(data)
+            console.log(data)
             const max = Math.max(...data.map(item => item.price))
             setRange([0, max])
             setMax(max)
