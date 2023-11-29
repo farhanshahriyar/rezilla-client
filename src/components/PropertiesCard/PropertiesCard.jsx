@@ -25,8 +25,8 @@ const PropertiesCard = ({ property }) => {
           <p className="text-sm font-bold text-[#737D8C]">{agentName}</p>
         </div> */}
         <hr className='mt-5' />
-          {verified && (
-            <span className="text-[#143C38] text-xs font-semibold">Verified</span>
+             {property.status && (
+              <span className="text-[#143C38] text-xs font-semibold">{property.status}</span>
             )}
         <div className="flex items-center justify-between mt-4 mb-4">
             <p className="text-lg font-bold text-[#143C38] mt-2">${price}</p>

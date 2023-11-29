@@ -191,6 +191,9 @@ export default function PropertyDetails() {
                 <span className="text-[#143C38] text-xs font-semibold ml-3">
                   Agent Status : {property.status}
                 </span>
+                <span className="text-[#143C38] text-xs font-semibold ml-5">
+                  Purpose : {property.purpose}
+                </span>
               </div>
               <p className="text-base font-semibold leading-7 text-indigo-600">
                 Agent Name : {property.agentName}

@@ -39,6 +39,20 @@ const ManageProperties = () => {
       });
   };
 
+    const handleDelete = (propertyId) => {  
+    // Call to backend to delete property
+    axios.delete(`http://localhost:5000/properties/${propertyId}`)
+      .then(() => {
+        // Remove the property from state
+        setProperties(properties.filter(property => property._id !== propertyId));
+        Swal.fire('Deleted!', 'The property has been deleted.', 'success');
+      })
+      .catch(error => {
+        console.error('Error deleting property:', error);
+        Swal.fire('Error!', 'Could not delete property.', 'error');
+      });
+    }
+
   return (
     <div>
         <div className="flex flex-col">
@@ -75,7 +89,8 @@ const ManageProperties = () => {
                             </td>
                     
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                            <button type="button" className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Delete</button>
+                            <button onClick={() => handleDelete(property._id)}
+                             type="button" className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Delete</button>
                         </td>
                         </tr>
                     ))}
