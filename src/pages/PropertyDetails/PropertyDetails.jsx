@@ -113,7 +113,9 @@ export default function PropertyDetails() {
         date: new Date().toLocaleDateString(),
         title: property.title,
         review,
+        agentName: property.agentName,
         user: user.displayName,
+        email: user.email,
         photoURL: user.photoURL,
       });
       // console.log(data);
