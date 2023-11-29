@@ -17,7 +17,7 @@ const UserWishList = () => {
     const { toPDF, targetRef } = usePDF({filename: 'wishlists.pdf'});
      //calculate total price in user dashboard cart
      const totalPrice = wishList.reduce((total, item) => {
-      const price = parseFloat(item.price.replace(/,/g, ''));
+      const price = parseFloat(item.price);
       return total + price;
     }, 0);
     
