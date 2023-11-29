@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
-import axios from 'axios';
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 
 const MyReview = () => {
   const [reviews, setReviews] = useState([]);
-  const userId = 'loggedInUserId'; // eita dynamically set based korbe for the logged-in user's actual ID
   const {user} = useAuth();
   const axios = useAxiosSecure();
   useEffect(() => {
     // Fetch the reviews for the logged-in user
-        axios.get(`/reviews?userId=${userId}`)
-      .then(response => setReviews(response.data))
-      .catch(error => console.error('Error fetching reviews:', error));
-  }, [userId]);
+    axios.get(`/reviews?email=${user.email}`)
+    .then(response => setReviews(response.data))
+    .catch(error => console.error('Error fetching reviews:', error));
+}, [user.email]);
 
   const handleDelete = (reviewId) => {
     // Call to backend to delete review
