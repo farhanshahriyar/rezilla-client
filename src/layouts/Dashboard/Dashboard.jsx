@@ -28,6 +28,7 @@ const Dashboard = () => {
             <>
             <li className="mb-2"><Link to="/dashboard" className="px-4 py-2 text-white bg-green-700 rounded flex"><FaHome className='text-xl' />Admin Home</Link></li>
             <li className="mb-2"><Link to="/dashboard/admin-profile" className="px-4 py-2 text-white bg-green-700 rounded flex"><FaHome className='text-xl' />Admin Profile</Link></li>
+            <li className="mb-2"><Link to="/dashboard/manage-properties" className="px-4 py-2 text-white bg-green-700 rounded flex"><FaHome className='text-xl' />Manage Properties</Link></li>
             <li className="mb-2"><Link to="/dashboard/all-users" className="px-4 py-2 flex text-white bg-green-700 rounded"><FaHome className='text-xl' />Manage User</Link></li>
             <li className="mb-2"><Link to="/dashboard/manage-reviews" className="px-4 py-2 flex text-white bg-green-700 rounded"><FaUsers className='text-xl' />Manage Reviews</Link></li>
             </>

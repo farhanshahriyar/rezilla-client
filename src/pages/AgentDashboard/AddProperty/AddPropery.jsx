@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import uploadImgToImgBB from "../../../utils/imgbbUpload";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const AddPropery = () => {
   const {user} = useAuth()
   const [imageFile, setImageFile] = useState(null);
+
 
   const handleImageChange = (e) => {
     setImageFile(e.target.files[0]);
@@ -27,15 +30,39 @@ const AddPropery = () => {
           price: parseInt(e.target.price.value),
           bedrooms: parseInt(e.target.bedrooms.value),
           bathrooms: parseInt(e.target.bathrooms.value),
-          status: e.target.status.value,
+          purpose: e.target.purpose.value,
           description: e.target.description.value,
-
         };
         console.log(finalPropertyData);
-       
+        
+        // axios post request
+        axios.post('http://localhost:5000/properties', finalPropertyData)
+        .then((response) => {
+          console.log(response);
+          Swal.fire({
+            title: "Success!",
+            text: "Property Added Successfully sent!" + " " + "Please wait for admin approval!",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          Swal.fire({
+            title: "Error!",
+            text: "Something went wrong!",
+            icon: "error",
+            confirmButtonText: "Ok",
+          });
+        });
       } catch (error) {
         console.error('Error uploading image:', error);
-        
+        Swal.fire({ 
+          title: "Error!",
+          text: "Something went wrong!",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
       }
     }
   };
@@ -192,15 +219,15 @@ const AddPropery = () => {
                 </div>
                 <div className="space-y-2">
                   <label className="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200">
-                    Status
+                    Purpose
                   </label>
 
                   <input
                     id="af-submit-project-url"
                     type="text"
-                    name="status"
+                    name="purpose"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                    placeholder=" Enter Status Example : For Sale, For Rent, Sold"
+                    placeholder=" Enter Purpose Example : For Sale, For Rent, Sold"
                   />
                 </div>
                 <div className="space-y-2">

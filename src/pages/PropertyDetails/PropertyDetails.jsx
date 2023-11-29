@@ -189,7 +189,7 @@ export default function PropertyDetails() {
                   alt={property.agentName}
                 />
                 <span className="text-[#143C38] text-xs font-semibold ml-3">
-                  Status : {property.status}
+                  Agent Status : {property.status}
                 </span>
               </div>
               <p className="text-base font-semibold leading-7 text-indigo-600">

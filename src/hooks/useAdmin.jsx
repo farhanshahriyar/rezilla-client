@@ -27,7 +27,7 @@ const useAdmin = () => {
       queryFn: async () => {
         try {
           const res = await axiosSecure.get(`/users/admin/${user.email}`);
-          console.log("Admin data:", res.data);
+          // console.log("Admin data:", res.data);
           return res.data?.admin;
         } catch (error) {
           console.error("Error fetching admin data:", error);

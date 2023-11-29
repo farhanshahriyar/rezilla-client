@@ -65,8 +65,8 @@ const Properties = () => {
               <hr className='mt-5'></hr>
               <p className="text-lg font-bold text-[#143C38] mt-2">${property.price}</p>
               <div className="flex items-center justify-between mt-4">
-                {property.verified && (
-                  <span className="text-[#143C38] text-xs font-semibold">Verified</span>
+                {property.status && (
+                  <span className="text-[#143C38] text-xs font-semibold">{property.status}</span>
                 )}
                 <Link to={`/properties/${property._id}`}>
                 <button 
