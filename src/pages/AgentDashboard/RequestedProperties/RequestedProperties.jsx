@@ -5,51 +5,69 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const RequestedProperties = () => {
-  const {user} = useAuth()
+  const { user } = useAuth();
   const [properties, setProperties] = useState([]);
-  console.log(properties)
+  console.log(properties);
   const axios = useAxiosPublic();
   // const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch properties when component mounts
     if (!user?.email) return;
-    axios.get(`http://localhost:5000/properties-requested?email=${user?.displayName}`)
-      .then(response => setProperties(response.data))
-      .catch(error => {
-        console.error('Error fetching properties:', error)
+    axios
+      .get(
+        `http://localhost:5000/properties-requested?email=${user?.displayName}`
+      )
+      .then((response) => setProperties(response.data))
+      .catch((error) => {
+        console.error("Error fetching properties:", error);
         // navigate('/');
       });
   }, [user?.email]);
 
   // handle offer accept and reject from agent what user requested
   // Function to handle accept
-const handleOfferAccept = (propertyId) => {
-  axios.patch(`http://localhost:5000/offerproperties/accept/${propertyId}`)
-    .then(response => {
-      // Update your state here to reflect changes
-      Swal.fire('Accepted!', 'The property has been accepted.', 'success');
-      // This might involve filtering the properties array and updating the status of the accepted property
-      setProperties(properties.map(property => property._id === propertyId ? { ...property, status: "accepted" } : property));
-    })
-    .catch(error => console.error('Error accepting property:', error));
-};
+  const handleOfferAccept = (propertyId) => {
+    axios
+      .patch(`http://localhost:5000/offerproperties/accept/${propertyId}`)
+      .then((response) => {
+        // Update your state here to reflect changes
+        Swal.fire("Accepted!", "The property has been accepted.", "success");
+        // This might involve filtering the properties array and updating the status of the accepted property
+        setProperties(
+          properties.map((property) =>
+            property._id === propertyId
+              ? { ...property, status: "accepted" }
+              : property
+          )
+        );
+      })
+      .catch((error) => console.error("Error accepting property:", error));
+  };
 
-// Function to handle reject
-const handleOfferReject = (propertyId) => {
-  axios.patch(`http://localhost:5000/offerproperties/reject/${propertyId}`)
-    .then(response => {
-      Swal.fire('Rejected!', 'The property has been rejected.', 'success');
-      // This might involve filtering the properties array and removing the rejected property
-      setProperties(properties.filter(property => property._id !== propertyId));
-    })
-    .catch(error => console.error('Error rejecting property:', error));
-};
+  // Function to handle reject
+  const handleOfferReject = (propertyId) => {
+    axios
+      .patch(`http://localhost:5000/offerproperties/reject/${propertyId}`)
+      .then((response) => {
+        Swal.fire("Rejected!", "The property has been rejected.", "success");
+        // This might involve filtering the properties array and removing the rejected property
+        setProperties(
+          properties.filter((property) => property._id !== propertyId)
+        );
+      })
+      .catch((error) => console.error("Error rejecting property:", error));
+  };
 
   return (
     <div>
-      <h2 className="text-lg text-center font-bold text-gray-800 dark:text-gray-200 bg-white dark:bg-slate-900 px-4 py-5 sm:px-6 rounded-t-xl border-b border-gray-200 dark:border-gray-700">Requested Property</h2>
-      <p className="mt-1 max-w-2xl text-base text-gray-700">Total Requested Property : <span className="font-bold">{properties.length}</span> </p>
+      <h2 className="text-lg text-center font-bold text-gray-800 dark:text-gray-200 bg-white dark:bg-slate-900 px-4 py-5 sm:px-6 rounded-t-xl border-b border-gray-200 dark:border-gray-700">
+        Requested Property
+      </h2>
+      <p className="mt-1 max-w-2xl text-base text-gray-700">
+        Total Requested :{" "}
+        <span className="font-bold">{properties.length} Property</span>{" "}
+      </p>
       <div className="flex flex-col">
         <div className="-m-1.5 overflow-x-auto">
           <div className="p-1.5 min-w-full inline-block align-middle">
@@ -103,41 +121,43 @@ const handleOfferReject = (propertyId) => {
                       scope="col"
                       className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase"
                     >
-                      Action 1
+                      Accept
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase"
                     >
-                      Action 2
+                      Reject
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                   {/* map */}
                   {properties.map((property, index) => (
-                  <tr key={property._id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                      {index + 1}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                      {property.title}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                      {property.location}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                      {property.buyerEmail}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                      {property.buyerName}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-bold dark:text-gray-200">
-                      ${property.offeredAmount}
-                    </td>
-                    <td aria-readonly className="px-6 py-4 whitespace-nowrap text-sm text-white bg-gray-700 dark:text-gray-200">
-                      {
-                        property.status === "pending" ? (
+                    <tr key={property._id}>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
+                        {index + 1}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                        {property.title}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                        {property.location}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                        {property.buyerEmail}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                        {property.buyerName}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-bold dark:text-gray-200">
+                        ${property.offeredAmount}
+                      </td>
+                      <td
+                        aria-readonly
+                        className="px-6 py-4 whitespace-nowrap text-sm text-white bg-gray-700 dark:text-gray-200"
+                      >
+                        {property.status === "pending" ? (
                           <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
                             Pending
                           </span>
@@ -149,10 +169,10 @@ const handleOfferReject = (propertyId) => {
                           <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
                             Rejected
                           </span>
-                        )
-                      }
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                        )}
+                      </td>
+                      {/* Conditional rendering for Accept and Reject buttons */}
+                      {/* <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                       <button
                         onClick={() => handleOfferAccept(property._id)}
                         type="button"
@@ -169,8 +189,38 @@ const handleOfferReject = (propertyId) => {
                       >
                         Reject
                       </button>
-                    </td>
-                  </tr>
+                    </td> */}
+                      {property.status === "pending" && (
+                        <>
+                          <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                            <button
+                              onClick={() => handleOfferAccept(property._id)}
+                              type="button"
+                              className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-green-600 hover:text-green-800"
+                            >
+                              Accept
+                            </button>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                            <button
+                              onClick={() => handleOfferReject(property._id)}
+                              type="button"
+                              className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800"
+                            >
+                              Reject
+                            </button>
+                          </td>
+                        </>
+                      )}
+
+                      {/* If the status is not pending, these cells will be empty */}
+                      {property.status !== "pending" && (
+                        <>
+                          <td></td>
+                          <td></td>
+                        </>
+                      )}
+                    </tr>
                   ))}
                 </tbody>
               </table>
