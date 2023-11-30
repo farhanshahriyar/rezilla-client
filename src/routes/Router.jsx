@@ -31,6 +31,7 @@ import ManageProperties from "../pages/AdminDashboard/ManageProperties/ManagePro
 // import UpdateAddedProperties from "../pages/AgentDashboard/MyAddProperties/UpdateAddedProperties/UpdateAddedProperties";
 import UpdateAddedProperties from "../pages/AgentDashboard/MyAddProperties/UpdateAddedProperties/UpdateAddedProperties"
 import MakeOfferForm from "../pages/UserDashboard/MakeOfferForm/MakeOfferForm";
+import Payment from "../pages/UserDashboard/UserBoughtProperty/Payment/Payment";
 
 
 export const router = createBrowserRouter([
@@ -151,6 +152,12 @@ export const router = createBrowserRouter([
             <MakeOfferForm/>
           </PrivateRoute>,
           loader: ({params})=> fetch(`http://localhost:5000/properties/${params.id}`)
+        },
+        {
+          path: "/dashboard/payment",
+          element: <PrivateRoute>
+            <Payment/>
+          </PrivateRoute>,
         }
       ]
     }
