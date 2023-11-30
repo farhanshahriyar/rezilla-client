@@ -30,6 +30,7 @@ import ManageReviews from "../pages/AdminDashboard/ManageReviews/ManageReviews";
 import ManageProperties from "../pages/AdminDashboard/ManageProperties/ManageProperties";
 // import UpdateAddedProperties from "../pages/AgentDashboard/MyAddProperties/UpdateAddedProperties/UpdateAddedProperties";
 import UpdateAddedProperties from "../pages/AgentDashboard/MyAddProperties/UpdateAddedProperties/UpdateAddedProperties"
+import MakeOfferForm from "../pages/UserDashboard/MakeOfferForm/MakeOfferForm";
 
 
 export const router = createBrowserRouter([
@@ -57,14 +58,7 @@ export const router = createBrowserRouter([
         { path: "/pricing", element: <Construction/>},
         { path: "/login", element: <Login/>},
         { path: "/sign-up", element: <SignUp/>},
-        { path: "/make-offer/:propertyId" , element:<PrivateRoute><MakeOfferPage/></PrivateRoute>,
-        loader: ({params})=> fetch(`http://localhost:5000/properties/${params.id}`).then(res=>res.json())
-      }
-      //   { path: "/test", element: 
-      //   <PrivateRoute>
-      //     <Test/>
-      //   </PrivateRoute>
-      //  },
+
     ]
   },
   // dashboard routes
@@ -150,8 +144,14 @@ export const router = createBrowserRouter([
           element: <PrivateRoute>
             <UpdateAddedProperties/>
           </PrivateRoute>,
+        },
+        {
+          path: "/dashboard/make-offer/:id",
+          element: <PrivateRoute>
+            <MakeOfferForm/>
+          </PrivateRoute>,
+          loader: ({params})=> fetch(`http://localhost:5000/properties/${params.id}`)
         }
-        
       ]
     }
   ]);

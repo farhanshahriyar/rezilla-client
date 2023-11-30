@@ -28,6 +28,7 @@ const AddPropery = () => {
           agentName: e.target.uname.value,
           email: e.target.email.value,
           price: parseInt(e.target.price.value),
+          maxprice: parseInt(e.target.maxprice.value),
           bedrooms: parseInt(e.target.bedrooms.value),
           bathrooms: parseInt(e.target.bathrooms.value),
           purpose: e.target.purpose.value,
@@ -180,7 +181,7 @@ const AddPropery = () => {
             
                 <div className="space-y-2">
                   <label className="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200">
-                    Price Range
+                    Minimum Price
                   </label>
 
                   <input
@@ -188,7 +189,20 @@ const AddPropery = () => {
                     type="number"
                     name="price"
                     className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                    placeholder=" Enter Price Range"
+                    placeholder=" Enter Minimum Price"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200">
+                    Maximum Price
+                  </label>
+
+                  <input
+                    id="af-submit-project-url"
+                    type="number"
+                    name="maxprice"
+                    className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                    placeholder=" Enter Maximum Price"
                   />
                 </div>
             

@@ -188,7 +188,7 @@ const UserWishList = () => {
                                  
 
                                   <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                  <Link to={`/make-offer/${property._id}`} className="inline-block">
+                                  <Link to={`/dashboard/make-offer/${property.propertyId}`} className="inline-block">
                                     <Button variant="outlined">
                                       Make Offer
                                     </Button>
