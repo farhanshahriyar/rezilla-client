@@ -1,73 +1,56 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 const BoughtProperty = () => {
-  const [properties, setProperties] = useState([]);
+  const [boughtProperties, setBoughtProperties] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/bought-properties')
-      .then(response => {
-        setProperties(response.data);
-      })
-      .catch(error => console.error('Error fetching bought properties:', error));
+    // Fetch the bought properties from the backend
+    const fetchProperties = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/bought-record'); // 265 index.js
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        setBoughtProperties(data);
+      } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+      }
+    };
+
+    fetchProperties();
   }, []);
 
-  const handlePayment = (propertyId) => {
-    // Logic to handle payment
-    console.log('Redirect to payment for propertyId:', propertyId);
-    // redirect to the payment page or open a payment modal
+  const handlePayment = async (propertyId) => {
+    // Here you would integrate with the Stripe payment
+    // Redirect the user to the payment page or open a payment modal
   };
 
   return (
-    <div className="flex flex-col">
-      <h2 className="text-lg text-center font-bold text-gray-800 dark:text-gray-200 bg-white dark:bg-slate-900 px-4 py-5 sm:px-6 rounded-t-xl border-b border-gray-200 dark:border-gray-700">
-        My Bought Property
-      </h2>
-      <p className="mt-1 max-w-2xl text-base text-gray-700">
-        Total Bought Property: {properties.length}
-      </p>
-      <div className="-m-1.5 overflow-x-auto">
-        <div className="p-1.5 min-w-full inline-block align-middle">
-          <div className="border rounded-lg shadow overflow-hidden dark:border-gray-700 dark:shadow-gray-900">
-            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead>
-                <tr className="divide-x divide-gray-200 dark:divide-gray-700">
-                  <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Property Title</th>
-                  <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Property Location</th>
-                  <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Agent Name</th>
-                  <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Offered Amount</th>
-                  <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Status</th>
-                  <th scope="col" className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">Action</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                {properties.map((property) => (
-                  <tr key={property.id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{property.title}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{property.location}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{property.agentName}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{property.offeredAmount}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{property.status}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                      {property.status === 'accepted' && (
-                        <button
-                          type="button"
-                          onClick={() => handlePayment(property.id)}
-                          className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                        >
-                          Pay
-                        </button>
-                      )}
-                      {property.status === 'bought' && (
-                        <span>Transaction ID: {property.transactionId}</span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+    <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <h2 className="text-lg text-center font-bold text-gray-800 dark:text-gray-200 bg-white dark:bg-slate-900 px-4 py-5 sm:px-6 rounded-t-xl border-b border-gray-200 dark:border-gray-700">
+      My Bought Properties are : {boughtProperties.length}
+    </h2>
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {boughtProperties.map(property => (
+          <div key={property._id} className="group flex flex-col h-full bg-white border border-gray-200 shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+          {/* <img className="h-52 w-full object-cover rounded-t-xl" src={property.imageUrl} alt={property.title} /> */}
+          <div className="p-4 md:p-6">
+          <h2 className='text-gray-800 font bold'>Property Title : <br></br>
+          <span className='text-black font-medium'>{property.title}</span></h2>
+          <p className='text-gray-800 font bold'>Location: <br></br>
+          <span className='text-black font-medium'>{property.location}</span></p>
+          {/* You would display the property image here */}
+          <p>Agent: {property.agentName}</p>
+          <p className='text-gray-800 font bold'>Offered Amount: $<span className='text-green-600 font-medium'>{property.offeredAmount}</span></p>
+          <p className='text-green-600 font-medium'>Status: {property.status}</p>
           </div>
+          <div className="mt-auto flex border-t border-gray-200 divide-x divide-gray-200 dark:border-gray-700">
+          {property.status === 'accepted' && (
+            <button onClick={() => handlePayment(property._id)} className='w-full py-3 px-4 text-sm font-medium text-white bg-green-900 dark:text-white hover:bg-black hover:text-white'>Pay</button>
+          )}
+          {/* Display transaction ID if status is 'bought' */}
         </div>
+        </div>
+      ))}
       </div>
     </div>
   );
