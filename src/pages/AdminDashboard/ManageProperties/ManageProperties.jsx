@@ -99,14 +99,13 @@ const ManageProperties = () => {
                                     <button onClick={() => approveProperty(property._id)} type='button' className='inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-green-600 '>Verify</button>
                                     <button onClick={() => rejectProperty(property._id)} type='button' className='inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 '>Reject</button>
                                 </div>
-                                )}
-                                {property.status === "verified" && <span className='text-green-800 text-lg'>Verified</span>
-                                }
-                                {property.status === "reject" && <span className='text-red-800 text-lg'>Rejected</span>
-                                }
-                                {
-                                    property.status === "pending" && <span className='text-blue-800 text-lg'>Pending</span>
-                                }
+                                  )}
+                                
+                                  {property.status === "verified" && <span className='text-green-800 text-lg'>Verified</span>
+                                  }
+                                
+                                  {property.status === "reject" && <span className='text-red-800 text-lg'>Rejected</span>
+                                  }
                             </td>
                     
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">

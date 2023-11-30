@@ -25,9 +25,14 @@ const MakeOfferForm = () => {
 
     // TODO: Fetch the property details using propertyId and set initial state
 
+    // const handleChange = (e) => {
+    //     setOffer({ ...offer, [e.target.name]: e.target.value(parseInt) });
+    // };
     const handleChange = (e) => {
-        setOffer({ ...offer, [e.target.name]: e.target.value(parseInt) });
+      const value = e.target.name === 'offeredAmount' ? parseInt(e.target.value, 10) : e.target.value;
+      setOffer({ ...offer, [e.target.name]: value });
     };
+  
 
     const handleOfferSubmit = async (e) => {
         e.preventDefault();
@@ -35,13 +40,12 @@ const MakeOfferForm = () => {
 
         try {
             const response = await axios.post('/offers', offer);
-            Swal.fire('Success!', 'Offer has been made.', 'success');
+            Swal.fire('Success!', 'Offer has been made. Please wait for agent acceptation', 'success', 1500);
             console.log(response.data);
         } catch (err) {
             Swal.fire('Error!', 'Could not make offer.', 'error');
             setError(err.response.data.message);
         }
-       
     };
    
   return (

@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 
 const UserWishList = () => {
-    const [wishList, refetch] = useWishList();
+    const [wishList, refetch] = useWishList(); 
     // const { user } = useContext(AuthContext);
     // const ref = useRef();
     const axiosSecure = useAxiosSecure();
