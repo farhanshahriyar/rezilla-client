@@ -133,7 +133,13 @@ const UserWishList = () => {
                     scope="col"
                     className="px-5 py-3 bg-white text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
                   >
-                    Price
+                    Min Price
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3 bg-white text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  >
+                    Max Price
                   </th>
                   <th
                     scope="col"
@@ -184,6 +190,9 @@ const UserWishList = () => {
                                   </td>
                                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                       ${property.price}
+                                  </td>
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                      ${property.maxprice}
                                   </td>
                                  
 

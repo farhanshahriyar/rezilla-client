@@ -26,21 +26,19 @@ const MakeOfferForm = () => {
     // TODO: Fetch the property details using propertyId and set initial state
 
     const handleChange = (e) => {
-        setOffer({ ...offer, [e.target.name]: e.target.value });
+        setOffer({ ...offer, [e.target.name]: e.target.value(parseInt) });
     };
 
     const handleOfferSubmit = async (e) => {
         e.preventDefault();
-        console.log(handleOfferSubmit)
-
-        // TODO: Validate the offered amount against the agent's specified range
+        // console.log(handleOfferSubmit)
 
         try {
             const response = await axios.post('/offers', offer);
-            // TODO: Success Swal on success
             Swal.fire('Success!', 'Offer has been made.', 'success');
             console.log(response.data);
         } catch (err) {
+            Swal.fire('Error!', 'Could not make offer.', 'error');
             setError(err.response.data.message);
         }
        
@@ -149,10 +147,11 @@ const MakeOfferForm = () => {
 
             
                 <div className="space-y-2">
-                  <label className="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200">
+                  <label className=" inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200">
                     Enter Offer Amount
                   </label>
                   <input
+                  className='py-2 px-3 w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600'
                     type="number"
                     name="offeredAmount"
                     value={offer.offeredAmount}
@@ -173,7 +172,7 @@ const MakeOfferForm = () => {
             </div>
           </div>
         </form>
-        {error && <p>{error}</p>}
+        {error && <p className='text-base text-red-700 font-bold'>{error}</p>}
       </div>
     </div>
   )

@@ -39,6 +39,7 @@ export default function PropertyDetails() {
         email: user.email,
         title: property.title,
         price: property.price,
+        maxprice: property.maxprice,
         location: property.location,
         imageUrl: property.imageUrl,
         agentName: property.agentName,

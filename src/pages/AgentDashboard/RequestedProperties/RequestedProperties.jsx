@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
 
 const RequestedProperties = () => {
+  const {user} = useAuth()
+  const [properties, setProperties] = useState([]);
+  console.log(properties)
+  const axios = useAxiosPublic();
+  // const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetch properties when component mounts
+    if (!user?.email) return;
+    axios.get(`http://localhost:5000/properties-requested?email=${user?.displayName}`)
+      .then(response => setProperties(response.data))
+      .catch(error => {
+        console.error('Error fetching properties:', error)
+        // navigate('/');
+      });
+  }, [user?.email]);
+
   return (
     <div>
       <h2 className="text-lg text-center font-bold text-gray-800 dark:text-gray-200 bg-white dark:bg-slate-900 px-4 py-5 sm:px-6 rounded-t-xl border-b border-gray-200 dark:border-gray-700">Requested Property</h2>
